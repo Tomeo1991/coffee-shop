@@ -12,6 +12,7 @@ export const Nav = styled.nav`
     position: sticky;
     top: 0;
     z-index: 10;
+    
     font-family: 'Fira Sans', sans-serif;
     
     @media screen and (max-width: 960px){
