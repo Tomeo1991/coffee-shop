@@ -1,6 +1,9 @@
 import Navbar from './components/Products/Navbar/Navbar';
 import Products from './components/Products/Products'
 import Cart from './components/Cart/Cart'
+import Home from './components/Home/Home'
+import Contact from './components/Contact/Contact'
+import Checkout from './components/CheckoutForm/Checkout/Checkout'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -19,32 +22,27 @@ const App = () => {
 
     const fetchCart = async () => {
         const cart = await commerce.cart.retrieve();
-
         setCart(cart)
     }
 
     const handleAddToCart = async (productId, quandtity) => {
         const item = await commerce.cart.add(productId, quandtity);
-
         setCart(item.cart)
     }
 
     const handleUpdateCartQty = async (productId, quantity) => {
         const { cart } = await commerce.cart.update(productId, { quantity });
-
         setCart(cart)
     }
 
     const handleRemoveFromCart = async (productId) => {
         const { cart } = await commerce.cart.remove(productId);
-
         setCart(cart)
     }
 
 
     const handleEmptyCart = async (productId) => {
         const { cart } = await commerce.cart.empty(productId);
-
         setCart(cart)
     }
 
@@ -53,16 +51,18 @@ const App = () => {
         fetchCart();
     }, [])
 
-    console.log(cart)
+    // console.log(cart)
 
     return (
         <Router>
             <div>
                 <Navbar totalItems={cart.total_items} />
                 <Switch>
-                    <Route exact path='/'>
-                        <Products products={products} onAddToCart={handleAddToCart} />
-
+                    <Route exact path='/products'>
+                        <Products
+                            products={products}
+                            onAddToCart={handleAddToCart}
+                        />
                     </Route>
                     <Route exact path='/cart'>
                         <Cart
@@ -71,6 +71,15 @@ const App = () => {
                             handleRemoveFromCart={handleRemoveFromCart}
                             handleUpdateCartQty={handleUpdateCartQty}
                         />
+                    </Route>
+                    <Route exact path='/'>
+                        <Home />
+                    </Route>
+                    <Route exact path='/contact'>
+                        <Contact />
+                    </Route>
+                    <Route exact path='/checkout'>
+                        <Checkout cart={cart} />
                     </Route>
                 </Switch>
             </div>

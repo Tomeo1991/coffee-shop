@@ -30,10 +30,9 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
                     <Button className={classes.emptyButton} size='large' variant='contained' color='secondary' onClick={() => handleEmptyCart(cart.id)}>EmptyCart</Button>
                 </div>
                 <div>
-                    <Button component={Link} to='/' className={classes.checkoutButton} size='large' variant='contained' color='primary'>Checkout</Button>
+                    <Button component={Link} to='/checkout' className={classes.checkoutButton} size='large' variant='contained' color='primary'>Checkout</Button>
                 </div>
             </div>
-
         </>
     )
     if (!cart.line_items) return 'loading...';
@@ -41,7 +40,7 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
 
         <Container>
             <div className={classes.toolbar} />
-            <Typography className={classes.title} variant='h3' gutterBottom>MOI AUSSI J'AI HATE</Typography>
+            <Typography className={classes.title} variant='h3' gutterBottom>Mon panier</Typography>
             {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
         </Container>
     )

@@ -1,36 +1,59 @@
 import React from 'react'
-import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography } from '@material-ui/core'
+import { IconButton, Badge } from '@material-ui/core'
 import { ShoppingCart } from '@material-ui/icons'
 import { Link, useLocation } from 'react-router-dom'
-import useStyles from './styles'
+import { FaBars } from 'react-icons/fa';
+
+import {
+    Nav,
+    NavBarContainer,
+    NavLogo,
+    MobileIcon,
+    NavMenu,
+    NavItem,
+    NavLinks
+} from './NavbarStyle'
+
 
 
 const Navbar = ({ totalItems }) => {
-    const classes = useStyles();
     const location = useLocation();
 
     return (
         <>
-            <AppBar className={classes.appBar} position='sticky' color='inherit '>
-                <Toolbar>
-                    <Typography component={Link} to='/' variant='h6' className={classes.title} color='inherit'>
-                        <img src='' alt='hello' height='25px' className={classes.image} />
-                        Coffee-sHop
-                    </Typography>
-                    <div className={classes.grow} />
-                    {location.pathname === '/' && (
-                        <div className={classes.button}>
-                            <IconButton component={Link} to='/cart' aria-label='show cart item' color='inherit '>
-                                <Badge badgeContent={totalItems} color='secondary'>
-                                    <ShoppingCart />
-                                </Badge>
-                            </IconButton>
-                        </div>)}
+            <Nav>
+                <NavBarContainer>
+                    <NavLogo to='/'>
+                        CoffeShop
+                    </NavLogo>
+                    <MobileIcon onClick=''>
+                        <FaBars />
+                    </MobileIcon>
+                    <NavMenu>
+                        <NavItem>
+                            <NavLinks to='/products'>
+                                Store
+                            </NavLinks>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinks to='/contact'>
+                                Contact
+                            </NavLinks>
+                        </NavItem>
 
-                </Toolbar>
-            </AppBar>
+                        <IconButton component={Link} to='/cart' aria-label='show cart item' color='inherit '>
+                            <Badge badgeContent={totalItems} color='white'>
+                                <ShoppingCart />
+                            </Badge>
+                        </IconButton>
+
+                    </NavMenu>
+                </NavBarContainer>
+            </Nav>
         </>
+
     )
 }
 
 export default Navbar
+
